@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/edit_recp"
+        android:id="@+id/editRecpMI"/>
+
+    <item
+        android:title="@string/delete_recp"
+        android:id="@+id/deleteRecpMI"/>
+
+</menu>
