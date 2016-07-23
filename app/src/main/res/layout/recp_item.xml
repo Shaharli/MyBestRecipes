@@ -16,13 +16,14 @@
         android:id="@+id/typeIV"
         android:src="@drawable/ico_cheese"
         android:layout_gravity="center_vertical"
-        android:layout_marginRight="18dp"/>
+        android:layout_marginRight="18dp" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="0.5"
+        android:layout_marginRight="18dp"
         android:layout_gravity="center_vertical">
 
 

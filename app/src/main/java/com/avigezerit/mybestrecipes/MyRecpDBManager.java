@@ -61,6 +61,8 @@ public class MyRecpDBManager {
 
     public void addNewRecipe(Recipe r){
 
+        db = new MyRecpDBHelper(context);
+
         cv = new ContentValues();
         cv.put(COL_NAME_1, r.getName());
         cv.put(COL_DESC_2, r.getDesc());

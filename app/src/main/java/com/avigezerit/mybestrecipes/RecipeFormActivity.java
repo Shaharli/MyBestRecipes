@@ -17,6 +17,7 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
 
     //get instance of database manager
     MyRecpDBManager dbm = MyRecpDBManager.getInstance();
+    MyRecpDBHelper db;
 
     //xml ref
     EditText recpNameET;
@@ -47,6 +48,9 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
 
         checkPurpose();
 
+        db = new MyRecpDBHelper(RecipeFormActivity.this);
+        db.getReadableDatabase();
+
         //intent get action
         Intent intent = this.getIntent();
 
@@ -73,7 +77,11 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
                 }
                 if (recpNameET.getText().toString().equals(" ") || uriET.getText().toString().equals(" ") || recpNameET.getText().toString().length() == 0 || uriET.getText().toString().length() == 0) {
                     Toast.makeText(this, "Make sure all fields are filled", Toast.LENGTH_SHORT).show();
-                } else addNewRecipe();
+                } else {
+                    db = new MyRecpDBHelper(RecipeFormActivity.this);
+                    addNewRecipe();
+                }
+
                 break;
 
             case R.id.cancelBtn:
@@ -92,6 +100,7 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
 
         if (!isEditing) {
             //adding to db using manager
+            db = new MyRecpDBHelper(RecipeFormActivity.this);
             dbm.addNewRecipe(r);
             Intent backToMain = new Intent(RecipeFormActivity.this, RecipesListActivity.class);
             startActivity(backToMain);
@@ -135,14 +144,14 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
     private void populateSpinner() {
 
         ArrayList<String> categories = new ArrayList<>();
-        categories.add("Vegetable");
-        categories.add("Fruit");
-        categories.add("Pastry");
-        categories.add("Meat");
-        categories.add("Dairy");
-        categories.add("Soup");
-        categories.add("Sushi");
-        categories.add("Sweets");
+        categories.add(getResources().getString(R.string.ct_veggie));
+        categories.add(getResources().getString(R.string.ct_fruit));
+        categories.add(getResources().getString(R.string.ct_pastry));
+        categories.add(getResources().getString(R.string.ct_meat));
+        categories.add(getResources().getString(R.string.ct_dairy));
+        categories.add(getResources().getString(R.string.ct_soup));
+        categories.add(getResources().getString(R.string.ct_sushi));
+        categories.add(getResources().getString(R.string.ct_sweets));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
