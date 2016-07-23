@@ -10,17 +10,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.avigezerit.mybestrecipes.RecipesListActivity"
-    tools:showIn="@layout/activity_my_recipes_list"
-    >
+    tools:showIn="@layout/activity_my_recipes_list">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyIV"
+        android:src="@drawable/bg_empty"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/recpLV"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_empty"/>
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

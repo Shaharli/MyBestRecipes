@@ -12,62 +12,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:isScrollContainer="true">
 
 
-    <EditText
-        android:id="@+id/recpNameET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="name"
-        android:layout_weight="0.25"/>
+        <EditText
+            android:id="@+id/recpNameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:hint="Title" />
 
-    <EditText
-        android:id="@+id/recpDescET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="description"
-        android:layout_weight="0.25"/>
+        <EditText
+            android:id="@+id/uriET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:hint="Paste url here..." />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/uriET"
-        android:hint="paste url here..."
-        android:layout_weight="0.25"/>
+        <EditText
+            android:id="@+id/recpDescET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:hint="Description" />
 
-    <Spinner
-        android:id="@+id/typeSP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.25"/>
+
+        <Spinner
+            android:id="@+id/typeSP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_weight="0.5"
             android:onClick="onClick"
-            android:text="cancel"
-            android:layout_weight="0.5" />
+            android:text="cancel" />
 
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:onClick="onClick"
-            android:text="Save"
             android:layout_weight="0.5"
             android:backgroundTint="@color/colorAccent"
-            android:textColor="#fff"/>
+            android:onClick="onClick"
+            android:text="Save"
+            android:textColor="#fff" />
 
 
     </LinearLayout>

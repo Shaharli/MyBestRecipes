@@ -1,9 +1,11 @@
 package com.avigezerit.mybestrecipes;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,10 +26,11 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
 
     //intent action
     int action;
-    boolean isEditing=false;
+    boolean isEditing = false;
 
     //Cursor
     Cursor c;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,22 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
         uriET = (EditText) findViewById(R.id.uriET);
         typeSP = (Spinner) findViewById(R.id.typeSP);
 
-        checkPurpose();
-
         populateSpinner();
 
+        checkPurpose();
+
+        //intent get action
+        Intent intent = this.getIntent();
+
+        if (getIntent().getAction() != null) {
+
+            String action = getIntent().getAction();
+
+            if (action.equalsIgnoreCase(Intent.ACTION_SEND) && intent.hasExtra(Intent.EXTRA_TEXT)) {
+                String s = intent.getStringExtra(Intent.EXTRA_TEXT);
+                uriET.setText(s);
+            }
+        }
     }
 
     @Override
@@ -53,10 +68,14 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
             case R.id.saveBtn:
 
                 //validate fields
-                if (recpNameET.getText().toString().equals(null) || uriET.getText().toString().equals(null)){
+                if (!URLUtil.isValidUrl(uriET.getText().toString())) {
+                    uriET.setError("Make sure the url address is correct");
+                }
+                if (recpNameET.getText().toString().equals(" ") || uriET.getText().toString().equals(" ") || recpNameET.getText().toString().length() == 0 || uriET.getText().toString().length() == 0) {
                     Toast.makeText(this, "Make sure all fields are filled", Toast.LENGTH_SHORT).show();
                 } else addNewRecipe();
                 break;
+
             case R.id.cancelBtn:
                 finish();
         }
@@ -71,12 +90,13 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
                 uriET.getText().toString(),
                 typeSP.getSelectedItemPosition());
 
-        if (!isEditing){
+        if (!isEditing) {
             //adding to db using manager
             dbm.addNewRecipe(r);
+            Intent backToMain = new Intent(RecipeFormActivity.this, RecipesListActivity.class);
+            startActivity(backToMain);
             finish();
-        }
-        else{
+        } else {
             //setting the right _id
             r.setSql_id(getIntent().getIntExtra("_id", 0));
             //updating by id using manager
@@ -89,24 +109,25 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
         //checking intent action: add=0 or edit=1
         action = getIntent().getIntExtra("action", 0);
 
-        if (action==1){
+        if (action == 1) {
             editMode();
-            isEditing=true;
+            isEditing = true;
         }
     }
 
-    private void editMode(){
+    private void editMode() {
 
-        if (action == 1){
+        if (action == 1) {
 
             //getting data by _id
             c = dbm.getDataAsCursorByID(getIntent().getIntExtra("_id", 0));
 
-            if (c.moveToNext()){
+            if (c.moveToNext()) {
                 //setting data from cursor to view
                 recpNameET.setText(c.getString(c.getColumnIndex(dbm.COL_NAME_1)));
                 recpDescET.setText(c.getString(c.getColumnIndex(dbm.COL_DESC_2)));
                 uriET.setText(c.getString(c.getColumnIndex(dbm.COL_URL_3)));
+                typeSP.setSelection(c.getInt(c.getColumnIndex(dbm.COL_TYPE_4)));
             }
         }
     }
@@ -128,4 +149,6 @@ public class RecipeFormActivity extends AppCompatActivity implements View.OnClic
         typeSP.setAdapter(adapter);
 
     }
+
+
 }

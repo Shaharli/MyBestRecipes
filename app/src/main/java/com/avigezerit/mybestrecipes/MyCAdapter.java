@@ -80,19 +80,6 @@ public class MyCAdapter extends CursorAdapter {
                 break;
         }
         typeICON.setImageResource(typeIconId);
-
-        /*
-        openBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemUrl));
-                context.startActivity(intent);
-                Intent webViewIntent = new Intent(context, WebViewActivity.class);
-                webViewIntent.putExtra("url", itemUrl);
-                context.startActivity(webViewIntent);
-            }
-        });
-        */
     }
 
 

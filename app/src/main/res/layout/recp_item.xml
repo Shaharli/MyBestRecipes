@@ -34,28 +34,24 @@
         android:id="@+id/recpNameTV"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Medium Text"
-        android:maxEms="70"
-        android:id="@+id/recpDescTV" />
+        <TextView
+            android:id="@+id/recpDescTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxEms="70"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </LinearLayout>
 
-    <!--
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/linkIV"
+        android:src="@drawable/ico_link"
         android:layout_gravity="center_vertical"
-        android:text="open"
-        android:id="@+id/goToBtn"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#fff"/>
-        -->
+        android:layout_marginRight="18dp"/>
 
 
 </LinearLayout>

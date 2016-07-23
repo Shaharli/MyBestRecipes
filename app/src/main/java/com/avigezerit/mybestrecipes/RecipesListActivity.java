@@ -3,7 +3,6 @@ package com.avigezerit.mybestrecipes;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +26,7 @@ public class RecipesListActivity extends AppCompatActivity implements ListView.O
 
     //xml ref
     ListView recpLV;
+    ImageView emptyIV;
 
     //re-using intent
     Intent intent;
@@ -53,6 +54,7 @@ public class RecipesListActivity extends AppCompatActivity implements ListView.O
 
         //xml ref
         recpLV = (ListView) findViewById(R.id.recpLV);
+        emptyIV= (ImageView) findViewById(R.id.emptyIV);
 
         recpLV.setOnItemClickListener(this);
 
@@ -71,7 +73,8 @@ public class RecipesListActivity extends AppCompatActivity implements ListView.O
         recpLV.setAdapter(adapter);
 
         if (adapter.getCount() != 0){
-            recpLV.setBackgroundColor(getResources().getColor(R.color.white));
+
+            emptyIV.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -169,7 +172,13 @@ public class RecipesListActivity extends AppCompatActivity implements ListView.O
 
         if (!uri.startsWith("http://") && !uri.startsWith("https://")) uri = "http://" + uri;
 
+        Intent webViewIntent = new Intent(this, WebViewActivity.class);
+        webViewIntent.putExtra("url", uri);
+        startActivity(webViewIntent);
+
+        /*
         intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
+        */
     }
 }
